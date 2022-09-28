@@ -62,15 +62,47 @@ public class LinkedList<T> {
         return head;
     }
 
-    public Node<T> deleteLastNode(){
+    public Node<T> deleteLastNode() {
         Node<T> currentNode = head;
         Node<T> previousNode = null;
-        while (Objects.nonNull(currentNode.getNext())){
+        while (Objects.nonNull(currentNode.getNext())) {
             previousNode = currentNode;
             currentNode = currentNode.getNext();
         }
         previousNode.setNext(null);
 
+        return head;
+    }
+
+    public void deleteList() {
+        head = null;
+    }
+
+    public Node<T> insertAtPosition(int position, T data) {
+        Node<T> newNode = new Node<>(data);
+        Node<T> previousNode = null;
+        Node<T> currentNode = head;
+        int currentPosition = 0;
+        while (currentPosition < position && Objects.nonNull(currentNode)) {
+            previousNode = currentNode;
+            currentPosition += 1;
+            currentNode = currentNode.getNext();
+        }
+        newNode.setNext(previousNode.getNext());
+        previousNode.setNext(newNode);
+        return head;
+    }
+
+    public Node<T> deleteAtPosition(int position) {
+        Node<T> previousNode = null;
+        Node<T> currentNode = head;
+        int currentPosition = 0;
+        while (currentPosition < position && Objects.nonNull(currentNode)) {
+            currentPosition += 1;
+            previousNode = currentNode;
+            currentNode = currentNode.getNext();
+        }
+        previousNode.setNext(currentNode.getNext());
         return head;
     }
 
